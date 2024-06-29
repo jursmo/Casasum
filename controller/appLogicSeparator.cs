@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Casasum.controller
 {
-    public class appLogicSeparator
+    sealed public class AppLogicSeparator
     {
         private SaleCasesList saleCasesList = new();
 
