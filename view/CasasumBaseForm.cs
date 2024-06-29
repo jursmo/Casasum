@@ -32,7 +32,12 @@ namespace Casasum.view
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            openFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = openFileDialog1.FileName;
+                label1.Text = "Selected file: " + openFileDialog1.SafeFileName;
+            }
         }
     }
 }
