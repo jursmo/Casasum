@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            folderBrowserDialog1 = new FolderBrowserDialog();
             button1 = new Button();
             textBox1 = new TextBox();
             label1 = new Label();
             comboBox1 = new ComboBox();
             dataGridView1 = new DataGridView();
+            openFileDialog1 = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -80,6 +80,10 @@
             dataGridView1.Size = new Size(545, 339);
             dataGridView1.TabIndex = 4;
             // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
             // casasumBaseForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -99,12 +103,11 @@
         }
 
         #endregion
-
-        private FolderBrowserDialog folderBrowserDialog1;
         private Button button1;
         private TextBox textBox1;
         private Label label1;
         private ComboBox comboBox1;
         private DataGridView dataGridView1;
+        private OpenFileDialog openFileDialog1;
     }
 }
