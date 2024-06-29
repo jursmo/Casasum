@@ -28,19 +28,83 @@
         /// </summary>
         private void InitializeComponent()
         {
+            folderBrowserDialog1 = new FolderBrowserDialog();
+            button1 = new Button();
+            textBox1 = new TextBox();
+            label1 = new Label();
+            comboBox1 = new ComboBox();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
+            // 
+            // button1
+            // 
+            button1.Location = new Point(456, 411);
+            button1.Name = "button1";
+            button1.Size = new Size(101, 27);
+            button1.TabIndex = 0;
+            button1.Text = "Open";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 411);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(438, 27);
+            textBox1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 388);
+            label1.Name = "label1";
+            label1.Size = new Size(108, 20);
+            label1.TabIndex = 2;
+            label1.Text = "Status and info";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(12, 12);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(545, 28);
+            comboBox1.TabIndex = 3;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 46);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(545, 339);
+            dataGridView1.TabIndex = 4;
             // 
             // casasumBaseForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(569, 458);
+            Controls.Add(dataGridView1);
+            Controls.Add(comboBox1);
+            Controls.Add(label1);
+            Controls.Add(textBox1);
+            Controls.Add(button1);
             Name = "casasumBaseForm";
-            Text = "Form1";
+            Text = "Casasum";
             Load += casasumBaseForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private FolderBrowserDialog folderBrowserDialog1;
+        private Button button1;
+        private TextBox textBox1;
+        private Label label1;
+        private ComboBox comboBox1;
+        private DataGridView dataGridView1;
     }
 }
