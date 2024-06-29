@@ -39,5 +39,6 @@ namespace Casasum.view
                 label1.Text = "Selected file: " + openFileDialog1.SafeFileName;
             }
         }
+        private controller.AppLogicSeparator separator = new();
     }
 }
