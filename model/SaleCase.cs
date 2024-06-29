@@ -24,8 +24,8 @@
         public double Vat { get => _vat; set => _vat = value; }
         public double PriceWoVat { get => _priceWoVat; set => _priceWoVat = value; }
         public double PriceWithVat { get => _priceWithVat; }
-        public bool WeekendSale { get => _weekendSale; }
-        public bool WorkWeekSale { get => _workWeekSale; }
+        public bool   WeekendSale { get => _weekendSale; }
+        public bool   WorkWeekSale { get => _workWeekSale; }
         public void processPriceWithVat()
         {
             double vatValue = _priceWoVat * _vat / 100;
