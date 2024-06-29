@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Casasum.controller
 {
-    public class appLogicSeparator
+    sealed public class AppLogicSeparator
     {
-        private SaleCasesList saleCasesList = new();
+        private model.SaleCasesList saleCasesList = new();
 
         public List<string> processXmlFile(string pathToXml)
         {
-            XmlFileParser xmlFileParser = new(pathToXml);
+            model.XmlFileParser xmlFileParser = new(pathToXml);
             saleCasesList.SaleCasesListInit = xmlFileParser.SaleCasesList;
             Dictionary<string, Dictionary<string, double>> saleSummary = Summarizer.saleSum(saleCasesList.weekendSaleQuery());
 
