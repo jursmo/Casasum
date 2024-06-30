@@ -18,13 +18,13 @@ namespace Casasum.view
             InitializeComponent();
         }
 
-        private void casasumBaseForm_Load(object sender, EventArgs e)
+        private void casasumBaseForm_Load( object sender, EventArgs e )
         {
             label1.Text = "Info: Select XML file with input data";
             button1.Text = "Open";
             dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnCount = 1;
-            dataGridView1.Columns[0].HeaderText = "Název modelu\nCena bez DPH       Cena s DPH";
+            dataGridView1.Columns[ 0 ].HeaderText = "Název modelu\nCena bez DPH       Cena s DPH";
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -34,13 +34,13 @@ namespace Casasum.view
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if( openFileDialog1.ShowDialog() == DialogResult.OK )
             {
                 textBox1.Text = openFileDialog1.FileName;
                 label1.Text = "Selected file: " + openFileDialog1.SafeFileName;
             }
-            List<string> printQueue = separator.processXmlFile( openFileDialog1.FileName );
-            foreach (string row in printQueue )
+            separator.processXmlFile( openFileDialog1.FileName );
+            foreach( string row in separator.SeparatorOutput.SumPrintQueue )
             {
                 dataGridView1.Rows.Add( row );
             }
