@@ -14,7 +14,7 @@ namespace Casasum.controller
         {
             model.XmlFileParser xmlFileParser = new(pathToXml);
             saleCasesList.SaleCasesListInit = xmlFileParser.SaleCasesList;
-            Dictionary<string, Dictionary<string, double>> saleSummary = Summarizer.saleSum(saleCasesList.weekendSaleQuery());
+            Dictionary<string, Dictionary<string, double>> saleSummary = model.Summarizer.saleSum(saleCasesList.weekendSaleQuery());
 
             StringBuilder str = new();
             List<string> printQueue = new List<string>();
