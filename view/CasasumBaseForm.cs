@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Casasum.controller;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,6 +38,11 @@ namespace Casasum.view
             {
                 textBox1.Text = openFileDialog1.FileName;
                 label1.Text = "Selected file: " + openFileDialog1.SafeFileName;
+            }
+            List<string> printQueue = separator.processXmlFile( openFileDialog1.FileName );
+            foreach (string row in printQueue )
+            {
+                dataGridView1.Rows.Add( row );
             }
         }
         private controller.AppLogicSeparator separator = new();
