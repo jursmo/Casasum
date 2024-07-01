@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,17 +29,23 @@ namespace Casasum.controller
             separatorOutput = new();
             model.XmlFileParser xmlFileParser = new( pathToXml );
             separatorOutput.SaleCasesList.SaleCasesListInit = xmlFileParser.SaleCasesList;
-            Dictionary< string, Dictionary<string, double >> saleSummary = model.Summarizer.saleSum( separatorOutput.SaleCasesList.weekendSaleQuery() );
+            summarize( (int) Constants.SaleTime.WeekendSale );
+
+        }
+
+        public void summarize( Constants.SaleTime saleTime )
+        {
+            Dictionary< string, Dictionary<string, double >> saleSummary = model.Summarizer.saleSum( separatorOutput.SaleCasesList.getSalesQuery( ( int ) saleTime ));
 
             StringBuilder str = new();
             List< string > printQueue = new List< string >();
-            foreach ( var model in saleSummary.Keys )
+            foreach( var model in saleSummary.Keys )
             {
                 str.Append( model + "\n " );
-                string toSubtract = saleSummary[ model ][ "priceWithVat" ].ToString( "C" );
-                int space = 25 - toSubtract.Length;
-                string spacebar = new(' ', space);
-                str.Append( saleSummary[ model ][ "priceWithVat" ].ToString( "C" ) + spacebar + saleSummary[ model ][ "priceWoVat" ].ToString( "C" ));
+                string multipurposeString = saleSummary[ model ][ "priceWithVat" ].ToString( "N0" );
+                int space = 25 - multipurposeString.Length;
+                string spacebar = new( ' ', space );
+                str.Append( multipurposeString + spacebar + saleSummary[ model ][ "priceWoVat" ].ToString( "N0" ));
 
                 separatorOutput.SumPrintQueue.Add( str.ToString() );
                 str = new();
