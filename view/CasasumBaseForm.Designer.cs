@@ -34,7 +34,11 @@
             comboBox1 = new ComboBox();
             dataGridView1 = new DataGridView();
             openFileDialog1 = new OpenFileDialog();
+            dataGridView2 = new DataGridView();
+            label2 = new Label();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -43,7 +47,7 @@
             button1.Name = "button1";
             button1.Size = new Size(101, 27);
             button1.TabIndex = 0;
-            button1.Text = "Open";
+            button1.Text = "Otevřít";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -66,29 +70,60 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(12, 12);
+            comboBox1.Location = new Point(580, 35);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(545, 28);
             comboBox1.TabIndex = 3;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 46);
+            dataGridView1.Location = new Point(580, 69);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(545, 339);
+            dataGridView1.Size = new Size(545, 316);
             dataGridView1.TabIndex = 4;
             // 
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(12, 35);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.Size = new Size(545, 350);
+            dataGridView2.TabIndex = 5;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(95, 20);
+            label2.TabIndex = 6;
+            label2.Text = "Vstupní data:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(580, 9);
+            label3.Name = "label3";
+            label3.Size = new Size(84, 20);
+            label3.TabIndex = 7;
+            label3.Text = "Součet cen:";
+            // 
             // casasumBaseForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(569, 458);
+            ClientSize = new Size(1137, 461);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(dataGridView2);
             Controls.Add(dataGridView1);
             Controls.Add(comboBox1);
             Controls.Add(label1);
@@ -98,6 +133,7 @@
             Text = "Casasum";
             Load += casasumBaseForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -109,5 +145,8 @@
         private ComboBox comboBox1;
         private DataGridView dataGridView1;
         private OpenFileDialog openFileDialog1;
+        private DataGridView dataGridView2;
+        private Label label2;
+        private Label label3;
     }
 }
