@@ -28,7 +28,7 @@ namespace Casasum.controller
             separatorOutput = new();
             model.XmlFileParser xmlFileParser = new( pathToXml );
             separatorOutput.SaleCasesList.SaleCasesListInit = xmlFileParser.SaleCasesList;
-            Dictionary< string, Dictionary<string, double >> saleSummary = model.Summarizer.saleSum( separatorOutput.SaleCasesList.weekendSaleQuery() );
+            Dictionary< string, Dictionary<string, double >> saleSummary = model.Summarizer.saleSum( separatorOutput.SaleCasesList.getSalesQuery( ( int ) Constants.SaleTime.WeekendSale ));
 
             StringBuilder str = new();
             List< string > printQueue = new List< string >();
