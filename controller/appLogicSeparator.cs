@@ -35,10 +35,10 @@ namespace Casasum.controller
             foreach ( var model in saleSummary.Keys )
             {
                 str.Append( model + "\n " );
-                string toSubtract = saleSummary[ model ][ "priceWithVat" ].ToString( "C" );
-                int space = 25 - toSubtract.Length;
+                string multipurposeString = saleSummary[ model ][ "priceWithVat" ].ToString( "N0" );
+                int space = 25 - multipurposeString.Length;
                 string spacebar = new(' ', space);
-                str.Append( saleSummary[ model ][ "priceWithVat" ].ToString( "C" ) + spacebar + saleSummary[ model ][ "priceWoVat" ].ToString( "C" ));
+                str.Append( multipurposeString + spacebar + saleSummary[ model ][ "priceWoVat" ].ToString( "N0" ));
 
                 separatorOutput.SumPrintQueue.Add( str.ToString() );
                 str = new();
