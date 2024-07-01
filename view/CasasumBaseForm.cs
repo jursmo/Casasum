@@ -18,29 +18,42 @@ namespace Casasum.view
             InitializeComponent();
         }
 
-        private void casasumBaseForm_Load( object sender, EventArgs e )
+        private void casasumBaseForm_Load(object sender, EventArgs e)
         {
             label1.Text = "Info: Select XML file with input data";
+
             button1.Text = "Open";
+
             dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnCount = 1;
             dataGridView1.Columns[ 0 ].HeaderText = "Název modelu\nCena bez DPH       Cena s DPH";
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.RowHeadersVisible = false;
+
+            dataGridView2.ColumnCount = 4;
+            dataGridView2.Columns[ 0 ].HeaderText = "Název modelu";
+            dataGridView2.Columns[ 1 ].HeaderText = "Datum prodeje";
+            dataGridView2.Columns[ 2 ].HeaderText = "Cena";
+            dataGridView2.Columns[ 3 ].HeaderText = "DPH";
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.RowHeadersVisible = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click( object sender, EventArgs e )
         {
             openFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
-            if( openFileDialog1.ShowDialog() == DialogResult.OK )
+            if ( openFileDialog1.ShowDialog() == DialogResult.OK )
             {
                 textBox1.Text = openFileDialog1.FileName;
                 label1.Text = "Selected file: " + openFileDialog1.SafeFileName;
             }
             separator.processXmlFile( openFileDialog1.FileName );
-            foreach( string row in separator.SeparatorOutput.SumPrintQueue )
+            foreach( var row in separator.SeparatorOutput.SaleCasesList.SaleCaseList )
+            {
+                dataGridView2.Rows.Add( row.Model, row.Date.ToString( "d.M.yyyy" ), row.PriceWoVat.ToString(), row.Vat.ToString() );
+            }
+            foreach ( string row in separator.SeparatorOutput.SumPrintQueue )
             {
                 dataGridView1.Rows.Add( row );
             }
