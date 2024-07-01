@@ -75,15 +75,15 @@ namespace Casasum.view
 
         private void comboBox1_SelectedIndexChanged( object sender, EventArgs e )
         {
-            if( comboBox1.SelectedIndex == 0 )       // Modely prodané o víkendu (default)
+            if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WeekendSale )       // Modely prodané o víkendu (default)
             {
 
             }
-            else if( comboBox1.SelectedIndex == 1 )  // Modely prodané přes pacovní týden
+            else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WorkWeekSale )  // Modely prodané přes pacovní týden
             {
                 
             }
-            else if( comboBox1.SelectedIndex == 2 )  // Celkový součet prodaných modelů
+            else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WorkWeekSale )  // Celkový součet prodaných modelů
             {
 
             }
