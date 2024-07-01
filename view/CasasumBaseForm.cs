@@ -20,9 +20,9 @@ namespace Casasum.view
 
         private void casasumBaseForm_Load(object sender, EventArgs e)
         {
-            label1.Text = "Info: Select XML file with input data";
+            label1.Text = "Info: Vyberte XML soubor se vtupními daty";
 
-            button1.Text = "Open";
+            button1.Text = "Otevřít";
 
             dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnCount = 1;
@@ -46,7 +46,7 @@ namespace Casasum.view
             if ( openFileDialog1.ShowDialog() == DialogResult.OK )
             {
                 textBox1.Text = openFileDialog1.FileName;
-                label1.Text = "Selected file: " + openFileDialog1.SafeFileName;
+                label1.Text = "Vybraný soubor: " + openFileDialog1.SafeFileName;
             }
             separator.processXmlFile( openFileDialog1.FileName );
             foreach( var row in separator.SeparatorOutput.SaleCasesList.SaleCaseList )

@@ -47,7 +47,7 @@
             button1.Name = "button1";
             button1.Size = new Size(101, 27);
             button1.TabIndex = 0;
-            button1.Text = "Open";
+            button1.Text = "Otevřít";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -102,18 +102,18 @@
             label2.AutoSize = true;
             label2.Location = new Point(12, 9);
             label2.Name = "label2";
-            label2.Size = new Size(77, 20);
+            label2.Size = new Size(95, 20);
             label2.TabIndex = 6;
-            label2.Text = "Input data";
+            label2.Text = "Vstupní data:";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(580, 9);
             label3.Name = "label3";
-            label3.Size = new Size(83, 20);
+            label3.Size = new Size(84, 20);
             label3.TabIndex = 7;
-            label3.Text = "Summarize";
+            label3.Text = "Součet cen:";
             // 
             // casasumBaseForm
             // 
