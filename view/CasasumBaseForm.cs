@@ -47,6 +47,14 @@ namespace Casasum.view
 
         private void button1_Click( object sender, EventArgs e )
         {
+            if( dataGridView2.Rows.Count > 0 )
+            {
+                dataGridView2.Rows.Clear();
+            }
+            if (dataGridView1.Rows.Count > 0)
+            {
+                dataGridView1.Rows.Clear();
+            }
             openFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
             if ( openFileDialog1.ShowDialog() == DialogResult.OK )
             {
@@ -56,7 +64,7 @@ namespace Casasum.view
             separator.processXmlFile( openFileDialog1.FileName );
             foreach ( var row in separator.SeparatorOutput.SaleCasesList.SaleCaseList )
             {
-                dataGridView2.Rows.Add( row.Model, row.Date.ToString( "d.M.yyyy" ), row.PriceWoVat.ToString(), row.Vat.ToString() );
+                dataGridView2.Rows.Add( row.Model, row.Date.ToString( "d.M.yyyy" ), row.PriceWoVat.ToString("N0")+",-", row.Vat.ToString() );
             }
             foreach ( string row in separator.SeparatorOutput.SumPrintQueue )
             {
