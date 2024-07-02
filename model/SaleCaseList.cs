@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,19 +16,19 @@ namespace Casasum.model
         public SaleCasesList(List<SaleCase> salesList) { _saleCasesList = salesList; }
 
         public List<SaleCase> SaleCaseList { get => _saleCasesList; set => _saleCasesList = value; }
-        public dynamic getSalesQuery( int saleTime )
+        public dynamic getSalesQuery( controller.Constants.SaleTime saleTime )
         {
-            if( saleTime == ( int ) controller.Constants.SaleTime.WeekendSale )
+            if( saleTime == controller.Constants.SaleTime.WeekendSale )
             {
                 return from saleCase in _saleCasesList where saleCase.WeekendSale == true select new { saleCase };
             }
-            else if( saleTime == ( int ) controller.Constants.SaleTime.WorkWeekSale)
+            else if( saleTime ==  controller.Constants.SaleTime.WorkWeekSale)
             {
                 return from saleCase in _saleCasesList where saleCase.WorkWeekSale == true select new { saleCase };
             }
-            else if( saleTime == ( int ) controller.Constants.SaleTime.AllSales )
+            else if( saleTime ==  controller.Constants.SaleTime.AllSales )
             {
-                return from saleCase in _saleCasesList where saleCase.WorkWeekSale == true select new { saleCase };
+                return from saleCase in _saleCasesList select new { saleCase };
             }
             // else throw something???
 

@@ -60,7 +60,7 @@ namespace Casasum.view
             {
                 dataGridView2.Rows.Add( row.Model, row.Date.ToString( "d.M.yyyy" ), row.PriceWoVat.ToString("N0")+",-", row.Vat.ToString() );
             }
-            foreach ( string row in separator.SeparatorOutput.SumPrintQueue )
+            foreach ( string row in separator.SeparatorOutput.WeekendSumPrintQueue )
             {
                 dataGridView1.Rows.Add( row );
             }
@@ -72,7 +72,7 @@ namespace Casasum.view
             if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WeekendSale )       // Modely prodané o víkendu (default)
             {
                 resetTable( dataGridView1 );
-                foreach (string row in separator.SeparatorOutput.SumPrintQueue)  // do funcie? - ten istý kód na dvoch miestach
+                foreach (string row in separator.SeparatorOutput.WeekendSumPrintQueue) 
                 {
                     dataGridView1.Rows.Add(row);
                 }
@@ -80,10 +80,20 @@ namespace Casasum.view
             else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WorkWeekSale )  // Modely prodané přes pacovní týden
             {
                 resetTable(dataGridView1);
+                separator.summarize( controller.Constants.SaleTime.WorkWeekSale );
+                foreach (string row in separator.SeparatorOutput.WorkWeekSumPrintQueue)
+                {
+                    dataGridView1.Rows.Add(row);
+                }
             }
             else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.AllSales )  // Celkový součet prodaných modelů
             {
                 resetTable(dataGridView1);
+                separator.summarize( controller.Constants.SaleTime.AllSales );
+                foreach (string row in separator.SeparatorOutput.AllDaysSumPrintQueue)
+                {
+                    dataGridView1.Rows.Add(row);
+                }
             }
         }
 
