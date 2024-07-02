@@ -47,14 +47,8 @@ namespace Casasum.view
 
         private void button1_Click( object sender, EventArgs e )
         {
-            if( dataGridView2.Rows.Count > 0 )
-            {
-                dataGridView2.Rows.Clear();
-            }
-            if (dataGridView1.Rows.Count > 0)
-            {
-                dataGridView1.Rows.Clear();
-            }
+            resetTable(dataGridView1);
+            resetTable(dataGridView2);
             openFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
             if ( openFileDialog1.ShowDialog() == DialogResult.OK )
             {
@@ -77,15 +71,27 @@ namespace Casasum.view
         {
             if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WeekendSale )       // Modely prodané o víkendu (default)
             {
-
+                resetTable( dataGridView1 );
+                foreach (string row in separator.SeparatorOutput.SumPrintQueue)  // do funcie? - ten istý kód na dvoch miestach
+                {
+                    dataGridView1.Rows.Add(row);
+                }
             }
             else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WorkWeekSale )  // Modely prodané přes pacovní týden
             {
-                
+                resetTable(dataGridView1);
             }
-            else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WorkWeekSale )  // Celkový součet prodaných modelů
+            else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.AllSales )  // Celkový součet prodaných modelů
             {
+                resetTable(dataGridView1);
+            }
+        }
 
+        private void resetTable( DataGridView table )
+        {
+            if ( table.Rows.Count > 0 )
+            {
+                table.Rows.Clear();
             }
         }
     }
