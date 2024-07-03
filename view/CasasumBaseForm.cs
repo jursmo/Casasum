@@ -50,38 +50,48 @@ namespace Casasum.view
             resetTable(dataGridView1);
             resetTable(dataGridView2);
             openFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
-            if ( openFileDialog1.ShowDialog() == DialogResult.OK )
+            if( openFileDialog1.ShowDialog() == DialogResult.OK )
             {
                 textBox1.Text = openFileDialog1.FileName;
                 label1.Text = "Vybraný soubor: " + openFileDialog1.SafeFileName;
             }
             separator.processXmlFile( openFileDialog1.FileName );
-            foreach ( var row in separator.SeparatorOutput.SaleCasesList.SaleCaseList )
+            if( separator.SeparatorOutput.ValidInputData )
             {
-                dataGridView2.Rows.Add( row.Model, row.Date.ToString( "d.M.yyyy" ), row.PriceWoVat.ToString("N0")+",-", row.Vat.ToString() );
+                foreach (var row in separator.SeparatorOutput.SaleCasesList.SaleCaseList)
+                {
+                    dataGridView2.Rows.Add(row.Model, row.Date.ToString("d.M.yyyy"), row.PriceWoVat.ToString("N0") + ",-", row.Vat.ToString());
+                }
+                foreach (string row in separator.SeparatorOutput.WeekendSumPrintQueue)
+                {
+                    dataGridView1.Rows.Add(row);
+                }
             }
-            foreach ( string row in separator.SeparatorOutput.WeekendSumPrintQueue )
+            else
             {
-                dataGridView1.Rows.Add( row );
+                MessageBox.Show("Unvalid Input Data", "form closing", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                dataGridView2.Rows.Add("Input data error", "Input data error", "Input data error", "Input data error");
+                dataGridView1.Rows.Add("Input data error");
             }
         }
         private controller.AppLogicSeparator separator = new();
 
         private void comboBox1_SelectedIndexChanged( object sender, EventArgs e )
         {
+            if( !separator.SeparatorOutput.ValidInputData ) { MessageBox.Show("Unvalid Input Data", "form closing", MessageBoxButtons.OK, MessageBoxIcon.Stop); return; }
             if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WeekendSale )       // Modely prodané o víkendu (default)
             {
                 resetTable( dataGridView1 );
-                foreach (string row in separator.SeparatorOutput.WeekendSumPrintQueue) 
+                foreach( string row in separator.SeparatorOutput.WeekendSumPrintQueue ) 
                 {
-                    dataGridView1.Rows.Add(row);
+                    dataGridView1.Rows.Add( row );
                 }
             }
             else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WorkWeekSale )  // Modely prodané přes pacovní týden
             {
                 resetTable(dataGridView1);
                 separator.summarize( controller.Constants.SaleTime.WorkWeekSale );
-                foreach (string row in separator.SeparatorOutput.WorkWeekSumPrintQueue)
+                foreach( string row in separator.SeparatorOutput.WorkWeekSumPrintQueue )
                 {
                     dataGridView1.Rows.Add(row);
                 }
@@ -90,7 +100,7 @@ namespace Casasum.view
             {
                 resetTable(dataGridView1);
                 separator.summarize( controller.Constants.SaleTime.AllSales );
-                foreach (string row in separator.SeparatorOutput.AllDaysSumPrintQueue)
+                foreach( string row in separator.SeparatorOutput.AllDaysSumPrintQueue )
                 {
                     dataGridView1.Rows.Add(row);
                 }
