@@ -38,7 +38,5 @@ namespace Casasum.model
             _saleCasesList.Add( saleCase );
         }
         public List< SaleCase > SaleCasesListInit { set => _saleCasesList = value; }
-        public List< string >   WarningMessages   { get => _warningMessages; set => _warningMessages = value; }
-        public List< string >   ErrorMessages     { get => _errorMessages; set => _errorMessages = value; }
     }
 }
