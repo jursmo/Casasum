@@ -17,6 +17,8 @@ namespace Casasum.controller
             private List< string >? _weekendSumPrintQueue  = null;
             private List< string >? _workWeekSumPrintQueue = null;    // it could remain uninitialised - it is calculate only for demand.
             private List< string >? _allDaysSumPrintQueue  = null;    // it could remain uninitialised - it is calculate only for demand.
+            private List< string >  _warningsMessagesList  = new();
+            private List< string >  _errorMessagesList     = new();
             private bool            _validInputData        = true;
 
             public model.SaleCasesList SaleCasesList { get => _saleCasesList;  }
@@ -24,6 +26,8 @@ namespace Casasum.controller
             public List< string > WeekendSumPrintQueue   { get => _weekendSumPrintQueue;  set => _weekendSumPrintQueue  = value; }
             public List< string > WorkWeekSumPrintQueue  { get => _workWeekSumPrintQueue; set => _workWeekSumPrintQueue = value; }
             public List< string > AllDaysSumPrintQueue   { get => _allDaysSumPrintQueue;  set => _allDaysSumPrintQueue  = value; }
+            public List< string > WarningMessagesList    { get => _warningsMessagesList; }
+            public List< string > ErrorMessagesList      { get => _errorMessagesList; }
             public bool         ValidInputData           { get => _validInputData; set => _validInputData = value; }
 
             public bool isItNull( Constants.SaleTime saleTime)
@@ -62,7 +66,7 @@ namespace Casasum.controller
             separatorOutput = new();
             try
             {
-                model.XmlFileParser xmlFileParser = new( pathToXml, separatorOutput.SaleCasesList );
+                model.XmlFileParser xmlFileParser = new( pathToXml, separatorOutput.SaleCasesList, separatorOutput.ErrorMessagesList, separatorOutput.WarningMessagesList );
             }
             catch (Exception ex)
             {
@@ -79,7 +83,7 @@ namespace Casasum.controller
                 if ( saleTime == Constants.SaleTime.WeekendSale )       { separatorOutput.WeekendSumPrintQueue  = new(); }
                 else if ( saleTime == Constants.SaleTime.WorkWeekSale ) { separatorOutput.WorkWeekSumPrintQueue = new(); }
                 else if ( saleTime == Constants.SaleTime.AllSales )     { separatorOutput.AllDaysSumPrintQueue  = new(); }
-                Dictionary< string, Dictionary< string, double >> saleSummary = model.Summarizer.saleSum( separatorOutput.SaleCasesList.getSalesQuery(/*(int)*/saleTime ));
+                Dictionary< string, Dictionary< string, double >> saleSummary = model.Summarizer.saleSum( separatorOutput.SaleCasesList.getSalesQuery( saleTime ));
 
                 StringBuilder str = new();
                 List< string > printQueue = new List< string >();

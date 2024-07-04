@@ -10,8 +10,6 @@ namespace Casasum.model
     sealed public class SaleCasesList
     {
         private List< SaleCase > _saleCasesList   = new();
-        private List< string >   _warningMessages = new();
-        private List< string >   _errorMessages   = new();
 
         public SaleCasesList() { }
         public SaleCasesList(List<SaleCase> salesList) { _saleCasesList = salesList; }
