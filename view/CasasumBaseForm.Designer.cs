@@ -37,6 +37,8 @@
             dataGridView2 = new DataGridView();
             label2 = new Label();
             label3 = new Label();
+            button2 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
@@ -116,11 +118,33 @@
             label3.TabIndex = 7;
             label3.Text = "Součet cen:";
             // 
+            // button2
+            // 
+            button2.Location = new Point(580, 409);
+            button2.Name = "button2";
+            button2.Size = new Size(184, 29);
+            button2.TabIndex = 8;
+            button2.Text = "Výpis zpráv";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(941, 409);
+            button3.Name = "button3";
+            button3.Size = new Size(184, 29);
+            button3.TabIndex = 9;
+            button3.Text = "Ukončit aplikaci";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // casasumBaseForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1137, 461);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(dataGridView2);
@@ -148,5 +172,7 @@
         private DataGridView dataGridView2;
         private Label label2;
         private Label label3;
+        private Button button2;
+        private Button button3;
     }
 }
