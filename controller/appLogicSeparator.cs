@@ -20,6 +20,7 @@ namespace Casasum.controller
             private List< string >  _warningsMessagesList  = new();
             private List< string >  _errorMessagesList     = new();
             private bool            _validInputData        = true;
+            private bool            _DataToShow            = false;
 
             public model.SaleCasesList SaleCasesList { get => _saleCasesList;  }
             public ref model.SaleCasesList SaleCasesListRef   { get => ref _saleCasesList; }
@@ -28,7 +29,8 @@ namespace Casasum.controller
             public List< string > AllDaysSumPrintQueue   { get => _allDaysSumPrintQueue;  set => _allDaysSumPrintQueue  = value; }
             public List< string > WarningMessagesList    { get => _warningsMessagesList; }
             public List< string > ErrorMessagesList      { get => _errorMessagesList; }
-            public bool         ValidInputData           { get => _validInputData; set => _validInputData = value; }
+            public bool           ValidInputData         { get => _validInputData; set => _validInputData = value; }
+            public bool           DataToShow             { get => _DataToShow; set => _DataToShow = value; }
 
             public bool isItNull( Constants.SaleTime saleTime)
             {
@@ -62,11 +64,17 @@ namespace Casasum.controller
         public SeparatorOut SeparatorOutput { get => separatorOutput; }
 
         public void processXmlFile( string pathToXml )
-        { 
+        {
+            List< bool > dataToShow = new() { false };  // little hack
             separatorOutput = new();
             try
             {
-                model.XmlFileParser xmlFileParser = new( pathToXml, separatorOutput.SaleCasesList, separatorOutput.ErrorMessagesList, separatorOutput.WarningMessagesList );
+                model.XmlFileParser xmlFileParser = new( pathToXml,
+                                                         separatorOutput.SaleCasesList,
+                                                         separatorOutput.ErrorMessagesList,
+                                                         separatorOutput.WarningMessagesList,
+                                                         dataToShow);
+                if (dataToShow[0] ) { separatorOutput.DataToShow = true; }  // little hack
             }
             catch (Exception ex)
             {
