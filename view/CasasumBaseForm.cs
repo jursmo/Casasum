@@ -18,7 +18,7 @@ namespace Casasum.view
             InitializeComponent();
         }
 
-        private void casasumBaseForm_Load( object sender, EventArgs e )
+        private void casasumBaseForm_Load(object sender, EventArgs e)
         {
             label1.Text = "Info: Vyberte XML soubor se vtupními daty";
 
@@ -40,23 +40,27 @@ namespace Casasum.view
             dataGridView2.RowHeadersVisible = false;
 
             comboBox1.Text = "Modely prodané o víkendu (default)";
-            comboBox1.Items.Insert( 0, "Modely prodané o víkendu (default)" );
-            comboBox1.Items.Insert( 1, "Modely prodané přes pacovní týden" );
-            comboBox1.Items.Insert( 2, "Celkový součet prodaných modelů" );
+            comboBox1.Items.Insert(0, "Modely prodané o víkendu (default)");
+            comboBox1.Items.Insert(1, "Modely prodané přes pacovní týden");
+            comboBox1.Items.Insert(2, "Součet všech prodaných modelů");
+
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
-        private void button1_Click( object sender, EventArgs e )
+        private void button1_Click(object sender, EventArgs e)
         {
             resetTable(dataGridView1);
             resetTable(dataGridView2);
             openFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
-            if( openFileDialog1.ShowDialog() == DialogResult.OK )
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = openFileDialog1.FileName;
                 label1.Text = "Vybraný soubor: " + openFileDialog1.SafeFileName;
             }
-            separator.processXmlFile( openFileDialog1.FileName );
-            if( separator.SeparatorOutput.ValidInputData )
+            separator.processXmlFile(openFileDialog1.FileName);
+            processAppMessages();
+            if (separator.SeparatorOutput.ValidInputData)
             {
                 foreach (var row in separator.SeparatorOutput.SaleCasesList.SaleCaseList)
                 {
@@ -69,50 +73,84 @@ namespace Casasum.view
             }
             else
             {
-                MessageBox.Show("Unvalid Input Data", "form closing", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                dataGridView2.Rows.Add("Input data error", "Input data error", "Input data error", "Input data error");
-                dataGridView1.Rows.Add("Input data error");
+                MessageBox.Show("Neplatné vstupní data!", "Chybové správy", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                dataGridView2.Rows.Add("Neplatné data", "Neplatné data", "Neplatné data", "Neplatné data");
+                dataGridView1.Rows.Add("Neplatné vstupní data");
             }
         }
         private controller.AppLogicSeparator separator = new();
 
-        private void comboBox1_SelectedIndexChanged( object sender, EventArgs e )
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if( !separator.SeparatorOutput.ValidInputData ) { MessageBox.Show("Unvalid Input Data", "form closing", MessageBoxButtons.OK, MessageBoxIcon.Stop); return; }
-            if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WeekendSale )       // Modely prodané o víkendu (default)
-            {
-                resetTable( dataGridView1 );
-                foreach( string row in separator.SeparatorOutput.WeekendSumPrintQueue ) 
-                {
-                    dataGridView1.Rows.Add( row );
-                }
-            }
-            else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.WorkWeekSale )  // Modely prodané přes pacovní týden
+            if (!separator.SeparatorOutput.ValidInputData) { MessageBox.Show("Neplatné vstupní data!", "Chybové správy", MessageBoxButtons.OK, MessageBoxIcon.Stop); return; }
+            if (comboBox1.SelectedIndex == (int)controller.Constants.SaleTime.WeekendSale)       // Modely prodané o víkendu (default)
             {
                 resetTable(dataGridView1);
-                separator.summarize( controller.Constants.SaleTime.WorkWeekSale );
-                foreach( string row in separator.SeparatorOutput.WorkWeekSumPrintQueue )
+                foreach (string row in separator.SeparatorOutput.WeekendSumPrintQueue)
                 {
                     dataGridView1.Rows.Add(row);
                 }
             }
-            else if( comboBox1.SelectedIndex == (int) controller.Constants.SaleTime.AllSales )  // Celkový součet prodaných modelů
+            else if (comboBox1.SelectedIndex == (int)controller.Constants.SaleTime.WorkWeekSale)  // Modely prodané přes pacovní týden
             {
                 resetTable(dataGridView1);
-                separator.summarize( controller.Constants.SaleTime.AllSales );
-                foreach( string row in separator.SeparatorOutput.AllDaysSumPrintQueue )
+                separator.summarize(controller.Constants.SaleTime.WorkWeekSale);
+                foreach (string row in separator.SeparatorOutput.WorkWeekSumPrintQueue)
+                {
+                    dataGridView1.Rows.Add(row);
+                }
+            }
+            else if (comboBox1.SelectedIndex == (int)controller.Constants.SaleTime.AllSales)  // Celkový součet prodaných modelů
+            {
+                resetTable(dataGridView1);
+                separator.summarize(controller.Constants.SaleTime.AllSales);
+                foreach (string row in separator.SeparatorOutput.AllDaysSumPrintQueue)
                 {
                     dataGridView1.Rows.Add(row);
                 }
             }
         }
 
-        private void resetTable( DataGridView table )
+        private void resetTable(DataGridView table)
         {
-            if ( table.Rows.Count > 0 )
+            if (table.Rows.Count > 0)
             {
                 table.Rows.Clear();
             }
+        }
+
+        private void processAppMessages()
+        {
+            List<List<string>> messagesLists = new List<List<string>>();
+            messagesLists.Add(separator.SeparatorOutput.WarningMessagesList);
+            messagesLists.Add(separator.SeparatorOutput.ErrorMessagesList);
+            List<MessageBoxIcon> messageIcons = new List<MessageBoxIcon> { MessageBoxIcon.Warning, MessageBoxIcon.Error };
+            List<string> messageLabels = new List<string> { "Varovné zprávy", "Chybové zprávy" };
+
+            byte iteration = 0;
+            foreach (var messagesList in messagesLists)
+            {
+                if (messagesList.Count > 0)
+                {
+                    StringBuilder message = new();
+                    foreach (var msg in separator.SeparatorOutput.WarningMessagesList)
+                    {
+                        message.Append(msg + "\n");
+                    }
+                    MessageBox.Show(message.ToString(), messageLabels[iteration], MessageBoxButtons.OK, messageIcons[iteration]);
+                }
+                iteration++;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            processAppMessages();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
