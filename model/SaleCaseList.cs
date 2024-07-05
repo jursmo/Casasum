@@ -9,8 +9,7 @@ namespace Casasum.model
 {
     sealed public class SaleCasesList
     {
-        private List<SaleCase>? _saleCasesList;
-        // bool initialised?
+        private List< SaleCase > _saleCasesList   = new();
 
         public SaleCasesList() { }
         public SaleCasesList(List<SaleCase> salesList) { _saleCasesList = salesList; }
@@ -34,6 +33,10 @@ namespace Casasum.model
 
             return null;
         }
-        public List<SaleCase> SaleCasesListInit { set => _saleCasesList = value; }
+        public void saleCaseAdd( SaleCase saleCase )
+        {
+            _saleCasesList.Add( saleCase );
+        }
+        public List< SaleCase > SaleCasesListInit { set => _saleCasesList = value; }
     }
 }
