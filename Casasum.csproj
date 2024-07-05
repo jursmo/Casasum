@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="test_data\" />
+    <Folder Include="test_input_xml_data\" />
   </ItemGroup>
 
 </Project>
