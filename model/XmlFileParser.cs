@@ -37,7 +37,7 @@ namespace Casasum.model
         {
             const byte processStartBit = 0b10000; // start bit definition
             byte processStatus = processStartBit; // proces is starting
-            const byte controlStatus = 0b1111;          // this is what it should look like - all fields were be initialised
+            const byte controlStatus = 0b1111;    // this is what it should look like - all fields were be initialised
             string saleCaseNumber = "1";
             SaleCase sc = new SaleCase();         // initialisation
             foreach (XElement element in _xmlElements)
@@ -52,10 +52,11 @@ namespace Casasum.model
                     processStatusEvaluate( controlStatus, ref processStatus, saleCaseNumber, ref sc );
                     try
                     {
-                        saleCaseNumber = element.Attribute("um").Value;  // the value is used in the next cycle
+                        saleCaseNumber = element.Attribute("number").Value;  // the value is used in the next cycle
                     }
                     catch( NullReferenceException ex )
                     {
+                        _warningMessagesList.Add(ex.Data.Values.ToString());
                         saleCaseNumber = "undefined";
                     }
                 }
