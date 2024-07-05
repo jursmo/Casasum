@@ -59,7 +59,7 @@ namespace Casasum.view
                 label1.Text = "Vybraný soubor: " + openFileDialog1.SafeFileName;
             }
             separator.processXmlFile(openFileDialog1.FileName);
-            processAppMessages();
+            processAppMessages( onDemand: false );
             if (separator.SeparatorOutput.ValidInputData)
             {
                 foreach (var row in separator.SeparatorOutput.SaleCasesList.SaleCaseList)
@@ -119,7 +119,7 @@ namespace Casasum.view
             }
         }
 
-        private void processAppMessages()
+        private void processAppMessages(bool onDemand )
         {
             List<List<string>> messagesLists = new List<List<string>>();
             try
@@ -135,6 +135,7 @@ namespace Casasum.view
             List<string> messageLabels = new List<string> { "Varovné zprávy", "Chybové zprávy" };
 
             byte iteration = 0;
+            bool nothingToView = true;
             foreach (var messagesList in messagesLists)
             {
                 if (messagesList.Count > 0)
@@ -145,14 +146,19 @@ namespace Casasum.view
                         message.Append(msg + "\n");
                     }
                     MessageBox.Show(message.ToString(), messageLabels[iteration], MessageBoxButtons.OK, messageIcons[iteration]);
+                    nothingToView = false;
                 }
                 iteration++;
+            }
+            if (nothingToView && onDemand)
+            {
+                MessageBox.Show("Žádné data k zobrazení", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            processAppMessages();
+            processAppMessages( onDemand: true );
         }
 
         private void button3_Click(object sender, EventArgs e)
