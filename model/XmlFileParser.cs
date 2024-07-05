@@ -16,9 +16,9 @@ namespace Casasum.model
         private SaleCasesList          _saleCasesList;
         private List< string >         _warningMessagesList;
         private List< string >         _errorMessagesList;
-        private Dictionary< string, string > _processStatusToElement 
-            = new Dictionary< string, string >() { { "1", "Model" },{ "2", "sellDate" }
-                                               ,{ "4", "price" },{ "8", "vatRate" } };
+        private Dictionary< int, string > _processStatusToElement 
+            = new Dictionary< int, string >() { { 1, "Model" },{ 2, "sellDate" }
+                                               ,{ 4, "price" },{ 8, "vatRate" } };
 
         public XmlFileParser( string pathToFile, SaleCasesList casesList, List< string > _errMsgs, List< string > _warnMsgs )
         {
@@ -50,7 +50,14 @@ namespace Casasum.model
                         continue;                 // first pass - there is nothing to solve
                     }
                     processStatusEvaluate( controlStatus, ref processStatus, saleCaseNumber, ref sc );
-                    saleCaseNumber = element.Attribute("num").Value;  // the value is used in the next cycle
+                    try
+                    {
+                        saleCaseNumber = element.Attribute("um").Value;  // the value is used in the next cycle
+                    }
+                    catch( NullReferenceException ex )
+                    {
+                        saleCaseNumber = "undefined";
+                    }
                 }
                 else if (element.Name == "model")
                 {
@@ -98,8 +105,24 @@ namespace Casasum.model
             else
             {
                 byte absentElement = (byte) (processStatus ^ controlStatus);
-                string elementName = _processStatusToElement[ absentElement.ToString() ];
-                _warningMessagesList.Add($"XmlFileParser: Incomplete saling case omitted: number <{saleCaseNumber}> element <{elementName}>.");
+                string? elementName;
+                byte[] states = { 1, 2, 4, 8 };
+                foreach (var state in states)
+                {
+                    if( Convert.ToBoolean( state & absentElement ))
+                    {
+                        try
+                        {
+                            elementName = _processStatusToElement[ state ];
+                        }
+                        catch( KeyNotFoundException ex )
+                        {
+                            elementName = "neznámý typ";
+                            _warningMessagesList.Add( ex.Data.Values.ToString() );
+                        }
+                        _warningMessagesList.Add($"XmlFileParser: Incomplete saling case omitted: number <{saleCaseNumber}> element <{elementName}>.");
+                    }
+                }
                 processStatus = 0b0000;
                 sc = new SaleCase();
             }

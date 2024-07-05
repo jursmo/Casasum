@@ -9,7 +9,7 @@ namespace Casasum.controller
 {
     sealed public class AppLogicSeparator
     {
-        private SeparatorOut separatorOutput;
+        private SeparatorOut? separatorOutput;
 
         public class SeparatorOut
         {

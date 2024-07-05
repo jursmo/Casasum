@@ -125,7 +125,7 @@ namespace Casasum.view
             messagesLists.Add( separator.SeparatorOutput.WarningMessagesList );
             messagesLists.Add( separator.SeparatorOutput.ErrorMessagesList );
             List< MessageBoxIcon > messageIcons = new List< MessageBoxIcon > { MessageBoxIcon.Warning, MessageBoxIcon.Error };
-            List< string > messageLabels = new List< string > { "Varovní správy", "Chybové správy" };
+            List< string > messageLabels = new List< string > { "Varovné zprávy", "Chybové zprávy" };
 
             byte iteration = 0;
             foreach( var messagesList in messagesLists )
