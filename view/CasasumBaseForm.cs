@@ -62,13 +62,23 @@ namespace Casasum.view
             processAppMessages( onDemand: false );
             if (separator.SeparatorOutput.ValidInputData)
             {
-                foreach (var row in separator.SeparatorOutput.SaleCasesList.SaleCaseList)
+                if (separator.SeparatorOutput.DataToShow )
                 {
-                    dataGridView2.Rows.Add(row.Model, row.Date.ToString("d.M.yyyy"), row.PriceWoVat.ToString("N0") + ",-", row.Vat.ToString());
+
+                    foreach (var row in separator.SeparatorOutput.SaleCasesList.SaleCaseList)
+                    {
+                        dataGridView2.Rows.Add(row.Model, row.Date.ToString("d.M.yyyy"), row.PriceWoVat.ToString("N0") + ",-", row.Vat.ToString());
+                    }
+                    foreach (string row in separator.SeparatorOutput.WeekendSumPrintQueue)
+                    {
+                        dataGridView1.Rows.Add(row);
+                    }
                 }
-                foreach (string row in separator.SeparatorOutput.WeekendSumPrintQueue)
+                else
                 {
-                    dataGridView1.Rows.Add(row);
+                    MessageBox.Show("Žádné data k zobrazení", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView2.Rows.Add("Žádné data", "Žádné data", "Žádné data", "Žádné data");
+                    dataGridView1.Rows.Add("Žádné data k zobrazení");
                 }
             }
             else
@@ -83,6 +93,7 @@ namespace Casasum.view
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!separator.SeparatorOutput.ValidInputData) { MessageBox.Show("Neplatné vstupní data!", "Chybové správy", MessageBoxButtons.OK, MessageBoxIcon.Stop); return; }
+            if (!separator.SeparatorOutput.DataToShow) { MessageBox.Show("Žádné data k zobrazení", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information); return; }
             if (comboBox1.SelectedIndex == (int)controller.Constants.SaleTime.WeekendSale)       // Modely prodané o víkendu (default)
             {
                 resetTable(dataGridView1);
@@ -152,7 +163,7 @@ namespace Casasum.view
             }
             if (nothingToView && onDemand)
             {
-                MessageBox.Show("Žádné data k zobrazení", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Žádné zprávy k zobrazení", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
