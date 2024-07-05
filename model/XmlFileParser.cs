@@ -114,12 +114,12 @@ namespace Casasum.model
                     {
                         try
                         {
-                            elementName = _processStatusToElement[ state ];
+                            elementName = _processStatusToElement[ 3 ];
                         }
                         catch( KeyNotFoundException ex )
                         {
                             elementName = "neznámý typ";
-                            _warningMessagesList.Add( ex.Data.Values.ToString() );
+                            _warningMessagesList.Add( ex.Message );
                         }
                         _warningMessagesList.Add($"XmlFileParser: Incomplete saling case omitted: number <{saleCaseNumber}> element <{elementName}>.");
                     }

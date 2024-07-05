@@ -140,7 +140,7 @@ namespace Casasum.view
                 if (messagesList.Count > 0)
                 {
                     StringBuilder message = new();
-                    foreach (var msg in separator.SeparatorOutput.WarningMessagesList)
+                    foreach ( var msg in messagesList )
                     {
                         message.Append(msg + "\n");
                     }
