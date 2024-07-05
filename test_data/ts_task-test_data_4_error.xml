@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!--
+Název modelu (string)  Datum proeje (datetime)  Cena (double)  DPH (double)
+Škoda Oktávia          2.12.2010                500.000,-      20
+Škoda Felicia          3.12.2000                210.000,-      20
+Škoda Fabia            4.12.2010                350.000,-      20
+Škoda Oktávia          4.12.2010                500.000,-      20
+Škoda Oktávia          5.12.2010                500.000,-      20
+Škoda Fabia            5.12.2010                350.000,-      20
+Škoda Fabia            6.12.2010                350.000,-      20
+Škoda Forman           4.12.2000                100.000,-      19
+Škoda Favorit          5.12.2000                80.000-        19
+Škoda Forman           6.12.2000                100.000,-      19
+Škoda Felicia          3.12.2000                210.000,-      19
+Škoda Felicia          2.12.2000                210.000,-      19
+Škoda Oktávia          7.12.2010                500.000,-      20
+-->
+<list>
+ Case id="1">
+  <model> Škoda Oktávia </model>
+  <sellDate> 2.12.2010 </sellDate>
+  <price> 500000 </price>
+  <vatRate> 20 </vatRate>
+ </sellingCase>
+ <sellingCase id="2">
+  <model> Škoda Felicia </model>
+  <sellDate> 3.12.2000 </sellDate>
+  <price> 210000 </price>
+  <vatRate> 20 </vatRate>
+ </sellingCase>
+ <sellingCase id="3">
+  <model> Škoda Fabia </model>
+  <sellDate> 4.12.2010 </sellDate>
+  <price> 350000 </price>
+  <vatRate> 20 </vatRate>
+ </sellingCase>
+ <sellingCase id="4">
+  <model> Škoda Oktávia </model>
+  <sellDate> 4.12.2010 </sellDate>
+  <price> 500000 </price>
+  <vatRate> 20 </vatRate>
+ </sellingCase>
+ <sellingCase id="5">
+  <model> Škoda Oktávia </model>
+  <sellDate> 5.12.2010 </sellDate>
+  <price> 500000 </price>
+  <vatRate> 20 </vatRate>
+ </sellingCase>
+ <sellingCase id="6">
+  <model> Škoda Fabia </model>
+  <sellDate> 5.12.2010 </sellDate>
+  <price> 350000 </price>
+  <vatRate> 20 </vatRate>
+ </sellingCase>
+ <sellingCase id="7">
+  <model> Škoda Fabia </model>
+  <sellDate> 6.12.2010 </sellDate>
+  <price> 350000 </price>
+  <vatRate> 20 </vatRate>
+ </sellingCase>
+ <sellingCase id="8">
+  <model> Škoda Forman </model>
+  <sellDate> 4.12.2000 </sellDate>
+  <price> 100000 </price>
+  <vatRate> 19 </vatRate>
+ </sellingCase>
+ <sellingCase id="9">
+  <model> Škoda Favorit </model>
+  <sellDate> 5.12.2000 </sellDate>
+  <price> 80000 </price>
+  <vatRate> 19 </vatRate>
+ </sellingCase>
+ <sellingCase id="10">
+  <model> Škoda Forman </model>
+  <sellDate> 6.12.2000 </sellDate>
+  <price> 100000 </price>
+  <vatRate> 19 </vatRate>
+ </sellingCase>
+ <sellingCase id="11">
+  <model> Škoda Felicia </model>
+  <sellDate> 3.12.2000 </sellDate>
+  <price> 210000 </price>
+  <vatRate> 19 </vatRate>
+ </sellingCase>
+ <sellingCase id="12">
+  <model> Škoda Felicia </model>
+  <sellDate> 2.12.2000 </sellDate>
+  <price> 210000 </price>
+  <vatRate> 19 </vatRate>
+ </sellingCase>
+ <sellingCase id="13">
+  <model> Škoda Oktávia </model>
+  <sellDate> 7.12.2010 </sellDate>
+  <price> 500000 </price>
+  <vatRate> 19 </vatRate>
+ </sellingCase> 
+</list>
