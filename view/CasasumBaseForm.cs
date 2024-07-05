@@ -122,8 +122,15 @@ namespace Casasum.view
         private void processAppMessages()
         {
             List<List<string>> messagesLists = new List<List<string>>();
-            messagesLists.Add(separator.SeparatorOutput.WarningMessagesList);
-            messagesLists.Add(separator.SeparatorOutput.ErrorMessagesList);
+            try
+            {
+                messagesLists.Add(separator.SeparatorOutput.WarningMessagesList);
+                messagesLists.Add(separator.SeparatorOutput.ErrorMessagesList);
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Žádné data k zobrazení", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             List<MessageBoxIcon> messageIcons = new List<MessageBoxIcon> { MessageBoxIcon.Warning, MessageBoxIcon.Error };
             List<string> messageLabels = new List<string> { "Varovné zprávy", "Chybové zprávy" };
 
