@@ -70,6 +70,7 @@ namespace Casasum.controller
             }
             catch (Exception ex)
             {
+                SeparatorOutput.ErrorMessagesList.Add( ex.Message );
                 SeparatorOutput.ValidInputData = false;
                 return;
             }
