@@ -98,7 +98,7 @@ namespace Casasum.controller
 
                     if ( saleTime == Constants.SaleTime.WeekendSale )
                     {
-                        separatorOutput.WeekendSumPrintQueue.Add(str.ToString());
+                        separatorOutput.WeekendSumPrintQueue.Add( str.ToString() );
                     }
                     else if( saleTime == Constants.SaleTime.WorkWeekSale )
                     {

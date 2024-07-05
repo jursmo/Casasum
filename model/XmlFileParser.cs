@@ -52,7 +52,7 @@ namespace Casasum.model
                     processStatusEvaluate( controlStatus, ref processStatus, saleCaseNumber, ref sc );
                     try
                     {
-                        saleCaseNumber = element.Attribute("number").Value;  // the value is used in the next cycle
+                        saleCaseNumber = element.Attribute("id").Value;  // the value is used in the next cycle
                     }
                     catch( NullReferenceException ex )
                     {
